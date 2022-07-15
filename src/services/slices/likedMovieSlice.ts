@@ -20,8 +20,10 @@ export const likedMovieSlice = createSlice({
         state.likedMovies.splice(movieIndex, 1);
         return;
       }
-
       state.likedMovies.push(action.payload);
+    },
+    setLikedMovies: (state, action: PayloadAction<number[]>) => {
+      state.likedMovies = action.payload;
     }
   }
 });
