@@ -1,9 +1,15 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import {useLazyGetMoviesQuery} from './services/apis/movieApi';
 import reactLogo from './assets/react.svg'
 import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
+  const [trigger, resultObject] = useLazyGetMoviesQuery();
+
+  useEffect(() => {
+    trigger();
+  }, []);
 
   return (
     <div className="App">
