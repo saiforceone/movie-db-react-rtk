@@ -1,38 +1,33 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import {Zap as ZapIcon} from 'styled-icons/octicons';
 import {useLazyGetMoviesQuery} from './services/apis/movieApi';
-import reactLogo from './assets/react.svg'
 import './App.css'
+import {DefaultButton} from './components/shared/DefaultButton/DefaultButton';
+import {LikeButton} from './components/shared/LIkeButton/LikeButton';
+import {MovieCard} from './components/Movie/MovieCard/MovieCard';
+import {Heading1} from './components/shared/Typography/Typography';
 
 function App() {
-  const [count, setCount] = useState(0)
   const [trigger, resultObject] = useLazyGetMoviesQuery();
 
   useEffect(() => {
     trigger();
   }, []);
 
+  console.log(resultObject);
+
   return (
     <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+
+      <Heading1>The Header</Heading1>
+      <DefaultButton
+        icon={<ZapIcon />}
+        onClick={() => console.log('click meh')}
+      >
+        Click Me
+      </DefaultButton>
+      <LikeButton liked={true} onClick={() => console.log('like or unlike')} />
+      {resultObject.currentData?.results.map(movie => <MovieCard movie={movie} />)}
     </div>
   )
 }
