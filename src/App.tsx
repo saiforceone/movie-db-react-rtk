@@ -12,8 +12,12 @@ function App() {
   const [trigger, resultObject] = useLazyGetMoviesQuery();
 
   const movies = useMemo(() => {
-    const {data: {results}} = resultObject as {[key: string]: any};
-    return results ? results as Movie[] : [];
+    try {
+      const {data: {results}} = resultObject as {[key: string]: any};
+      return results ? results as Movie[] : [];
+    } catch (e) {
+      return [];
+    }
   }, [resultObject]);
 
   useEffect(() => {
