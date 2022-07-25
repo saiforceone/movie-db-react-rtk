@@ -1,4 +1,5 @@
 import { useEffect, useMemo } from 'react'
+import {useDispatch} from 'react-redux';
 import {Zap as ZapIcon} from 'styled-icons/octicons';
 import {useLazyGetMoviesQuery} from './services/apis/movieApi';
 import './App.css'
@@ -7,9 +8,11 @@ import {LikeButton} from './components/shared/LIkeButton/LikeButton';
 import {MovieCard} from './components/Movie/MovieCard/MovieCard';
 import {Heading1} from './components/shared/Typography/Typography';
 import {Movie} from './interfaces/movieInterface';
+import {toggleLikedMovie} from './services/slices/likedMovieSlice';
 
 function App() {
   const [trigger, resultObject] = useLazyGetMoviesQuery();
+  const dispatch = useDispatch();
 
   const movies = useMemo(() => {
     try {
@@ -35,7 +38,7 @@ function App() {
         Click Me
       </DefaultButton>
       <LikeButton liked={true} onClick={() => console.log('like or unlike')} />
-      {movies.map((movie: Movie) => <MovieCard movie={movie} />)}
+      {movies.map((movie: Movie) => <MovieCard movie={movie} toggleLikeAction={() => dispatch(toggleLikedMovie(movie.id))} />)}
     </div>
   )
 }
