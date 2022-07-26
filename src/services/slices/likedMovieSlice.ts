@@ -4,7 +4,7 @@
  */
 
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {LikedMovieSliceState} from '../../interfaces/movieInterface';
+import {LikedMovieSliceState, Movie} from '../../interfaces/movieInterface';
 
 const initialState: LikedMovieSliceState = {
   likedMovies: []
@@ -14,15 +14,15 @@ export const likedMovieSlice = createSlice({
   name: 'likedMovies',
   initialState,
   reducers: {
-    toggleLikedMovie: (state, action: PayloadAction<number>) => {
-      const movieIndex = state.likedMovies.findIndex(movId => movId === action.payload);
+    toggleLikedMovie: (state, action: PayloadAction<Movie>) => {
+      const movieIndex = state.likedMovies.findIndex(movie => movie.id === action.payload.id);
       if (movieIndex > -1) {
         state.likedMovies.splice(movieIndex, 1);
         return;
       }
       state.likedMovies.push(action.payload);
     },
-    setLikedMovies: (state, action: PayloadAction<number[]>) => {
+    setLikedMovies: (state, action: PayloadAction<Movie[]>) => {
       state.likedMovies = action.payload;
     }
   }

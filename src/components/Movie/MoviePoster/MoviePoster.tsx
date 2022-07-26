@@ -17,6 +17,7 @@ const PosterImage = styled.img`
   height: 100%;
   justify-self: center;
   object-fit: contain;
+  box-shadow: rgba(50, 50, 93, 0.25) 0 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 `;
 
 interface PosterContainerProps {
@@ -34,7 +35,6 @@ const PosterContainer = styled.div<PosterContainerProps>`
   height: 270px;
   justify-content: center;
   justify-self: center;
-  width: 100%;
   padding: 1rem;
 `;
 

@@ -22,5 +22,5 @@ export interface Movie {
 }
 
 export interface LikedMovieSliceState {
-  likedMovies: number[]
+  likedMovies: Movie[]
 }

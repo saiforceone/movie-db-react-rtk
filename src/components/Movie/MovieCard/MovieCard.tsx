@@ -23,16 +23,22 @@ interface MovieCardProps {
 
 const MovieCardContainer = styled.div`
   align-items: center;
+  background-color: #f4f4f4;
+  border-radius: 0.25rem;
+  color: #333333;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  box-shadow: rgba(50, 50, 93, 0.25) 0 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 `;
 
 export const MovieCard: FC<MovieCardProps> = ({movie, toggleLikeAction}) => {
   const likedStore = useSelector((state: RootState) => state.likedMovies);
 
   const isLiked = useMemo(() => {
-    return !!likedStore.likedMovies.find(movieId => movieId === movie.id);
+    return !!likedStore.likedMovies.find(likedMovie => likedMovie.id === movie.id);
   }, [likedStore.likedMovies]);
 
   return (
